@@ -10,13 +10,12 @@ namespace Cockroach
     static void Main(string[] args)
     {
       var connStringBuilder = new NpgsqlConnectionStringBuilder();
-      connStringBuilder.Host = "{host-name}";
+      connStringBuilder.Host = "localhost";
       connStringBuilder.Port = 26257;
       connStringBuilder.SslMode = SslMode.Require;
       connStringBuilder.Username = "{username}";
       connStringBuilder.Password = "{password}";
       connStringBuilder.Database = "bank";
-      connStringBuilder.RootCertificate = "~/.postgres/root.crt";
       connStringBuilder.TrustServerCertificate = true;
       Simple(connStringBuilder.ConnectionString);
     }
