@@ -16,7 +16,7 @@ namespace Cockroach
       connStringBuilder.Username = "{username}";
       connStringBuilder.Password = "{password}";
       connStringBuilder.Database = "{cluster-name}.bank";
-      connStringBuilder.RootCertificate = "{certs-dir}/cc-ca.crt";
+      connStringBuilder.RootCertificate = "~/.postgres/root.crt";
       connStringBuilder.TrustServerCertificate = true;
       Simple(connStringBuilder.ConnectionString);
     }
