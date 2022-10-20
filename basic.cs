@@ -18,6 +18,7 @@ namespace Cockroach
       connStringBuilder.Database = "{cluster-name}.bank";
       connStringBuilder.RootCertificate = "~/.postgres/root.crt";
       connStringBuilder.TrustServerCertificate = true;
+      connStringBuilder.ApplicationName = "docs_simplecrud_csharp";
       Simple(connStringBuilder.ConnectionString);
     }
 
