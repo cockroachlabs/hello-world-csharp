@@ -15,8 +15,7 @@ namespace Cockroach
       connStringBuilder.SslMode = SslMode.VerifyFull;
       connStringBuilder.Username = "{username}";
       connStringBuilder.Password = "{password}";
-      connStringBuilder.Database = "{cluster-name}.bank";
-      connStringBuilder.RootCertificate = "~/.postgres/root.crt";
+      connStringBuilder.Database = "bank";
       connStringBuilder.ApplicationName = "docs_simplecrud_csharp";
       Simple(connStringBuilder.ConnectionString);
     }
