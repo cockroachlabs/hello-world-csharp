@@ -10,11 +10,21 @@ namespace Cockroach
     static void Main(string[] args)
     {
       var connStringBuilder = new NpgsqlConnectionStringBuilder();
-      connStringBuilder.Host = "localhost";
-      connStringBuilder.Port = 26257;
       connStringBuilder.SslMode = SslMode.VerifyFull;
-      connStringBuilder.Username = "{username}";
-      connStringBuilder.Password = "{password}";
+      string? databaseUrlEnv = Environment.GetEnvironmentVariable("DATABASE_URL");
+      if (databaseUrlEnv == null) {
+        connStringBuilder.Host = "localhost";
+        connStringBuilder.Port = 26257;
+        connStringBuilder.Username = "{username}";
+        connStringBuilder.Password = "{password}";
+      } else {
+        Uri databaseUrl = new Uri(databaseUrlEnv);
+        connStringBuilder.Host = databaseUrl.Host;
+        connStringBuilder.Port = databaseUrl.Port;
+        var items = databaseUrl.UserInfo.Split(new[] { ':' });
+        if (items.Length > 0) connStringBuilder.Username = items[0];
+        if (items.Length > 1) connStringBuilder.Password = items[1];
+      }
       connStringBuilder.Database = "bank";
       Simple(connStringBuilder.ConnectionString);
     }
