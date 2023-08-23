@@ -36,8 +36,10 @@ namespace Cockroach
         conn.Open();
 
         // Create the "accounts" table.
-        new NpgsqlCommand("CREATE TABLE IF NOT EXISTS accounts (id INT PRIMARY KEY, balance INT)", conn).ExecuteNonQuery();
-
+        using (var cmd = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS accounts (id INT PRIMARY KEY, balance INT)", conn))
+        {
+          cmd.ExecuteNonQuery();
+        }
         // Insert two rows into the "accounts" table.
         using (var cmd = new NpgsqlCommand())
         {
